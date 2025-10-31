@@ -1,0 +1,66 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh; /* Pastikan full tinggi layar */
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #212529;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* Biar main (konten) mendorong footer ke bawah */
+main {
+  flex: 1;
+}
+
+/* Footer tetap di bawah dan rapi */
+footer {
+  background-color: #212529;
+  color: #fff;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+  border-top: 3px solid #0d6efd;
+}
+
+#sidebar a {
+  text-decoration: none; /* Hilangkan garis bawah */
+  color: #ffffff; /* Warna teks putih */
+  display: block;
+  padding: 8px 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar a:hover {
+  background-color: #495057; /* Warna saat hover */
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#sidebar .active > a {
+  background-color: #343a40;
+  font-weight: bold;
+}
