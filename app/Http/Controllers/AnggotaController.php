@@ -27,6 +27,25 @@ class AnggotaController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
         ]);
 
-        return redirect()->back()->with('success', 'Anggota baru berhasil ditambahkan!');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'no_anggota' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+        ]);
+
+        $anggota = Anggota::findOrFail($id);
+
+        $anggota->update([
+            'no_anggota' => $request->no_anggota,
+            'nama' => $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+        ]);
+
+       return redirect()->back()->with('success', 'Data berhasil diubah!');
     }
 }

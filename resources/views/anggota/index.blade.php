@@ -40,7 +40,7 @@
                         <th>No Anggota</th>
                         <th>Nama</th>
                         <th>Tanggal Lahir</th>
-                        <th>Aksi</th>
+                        <th style="width: 100px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,16 @@
                             <td>{{ $item->no_anggota }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
-                            <td class="text-center"></td>
+                            <td style="width: 100px;">
+                                <a href="#"
+                                    class="btn btn-warning"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editAnggotaModal{{ $item->id }}">
+                                        <i class="fa fa-pencil"></i>
+                                </a>
+
+                                @include('anggota.modal_edit', ['anggota' => $item])
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
