@@ -12,7 +12,7 @@
         </li>
 
         <li class="nav-item mb-2">
-            <a class="nav-link text-white d-flex align-items-center gap-2" href="#">
+            <a class="nav-link text-white d-flex align-items-center gap-2" href="{{ url('/anggota') }}">
                 <i class="fa-solid fa-users me-2"></i> <span>Data Anggota</span>
             </a>
         </li>
