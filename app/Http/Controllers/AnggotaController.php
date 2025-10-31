@@ -7,9 +7,19 @@ use App\Models\Anggota;
 
 class AnggotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $anggota = Anggota::all();
+        $keyword = $request->keyword;
+
+        if ($keyword) {
+            $anggota = Anggota::where('nama', 'like', "%$keyword%")
+                ->orWhere('no_anggota', 'like', "%$keyword%")
+                ->orWhere('tgl_lahir', 'like', "%$keyword%")
+                ->get();
+        } else {
+            $anggota = Anggota::all();
+        }
+
         return view('anggota.index', compact('anggota'));
     }
 
