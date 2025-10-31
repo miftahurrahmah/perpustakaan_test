@@ -10,3 +10,4 @@ Route::get('/', function () {
 Route::get('/anggota', [AnggotaController::class, 'index']);
 Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
 Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
+Route::delete('/anggota/{id}', [AnggotaController::class, 'destroy'])->name('anggota.destroy');

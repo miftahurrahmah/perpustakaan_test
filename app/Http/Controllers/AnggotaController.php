@@ -48,4 +48,12 @@ class AnggotaController extends Controller
 
        return redirect()->back()->with('success', 'Data berhasil diubah!');
     }
+
+    public function destroy($id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        $anggota->delete();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus!');
+    }
 }

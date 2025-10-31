@@ -51,14 +51,32 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
                             <td style="width: 100px;">
-                                <a href="#"
-                                    class="btn btn-warning"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editAnggotaModal{{ $item->id }}">
-                                        <i class="fa fa-pencil"></i>
-                                </a>
+                                <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">
 
-                                @include('anggota.modal_edit', ['anggota' => $item])
+                                    <a href="#"
+                                    class="btn btn-warning btn-sm d-flex align-items-center justify-content-center"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editAnggotaModal{{ $item->id }}"
+                                    style="width: 32px; height: 32px;">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+
+                                    @include('anggota.modal_edit', ['anggota' => $item])
+
+                                    <form action="{{ route('anggota.destroy', $item->id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                                        class="m-0 p-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm d-flex align-items-center justify-content-center"
+                                                style="width: 32px; height: 32px;"
+                                                title="Hapus">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
