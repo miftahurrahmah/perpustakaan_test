@@ -18,7 +18,7 @@
         </li>
 
         <li class="nav-item mb-2">
-            <a class="nav-link text-white d-flex align-items-center gap-2" href="#">
+            <a class="nav-link text-white d-flex align-items-center gap-2" href="/book">
                 <i class="fa-solid fa-book me-2"></i> <span>Data Buku</span>
             </a>
         </li>
