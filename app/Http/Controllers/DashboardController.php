@@ -12,6 +12,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        if (!session()->has('is_admin') || session('is_admin') !== true) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
         $totalAnggota = Anggota::count();
         $totalBuku = Book::count();
         $totalPeminjamanHariIni = Peminjaman::whereDate('tgl_peminjaman', Carbon::today())->count();

@@ -10,6 +10,10 @@ class AnggotaController extends Controller
 {
     public function index(Request $request)
     {
+        if (!session()->has('is_admin') || session('is_admin') !== true) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
         $keyword = $request->keyword;
 
         if ($keyword) {
