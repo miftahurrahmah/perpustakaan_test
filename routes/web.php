@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PeminjamanController;
 use App\Models\Anggota;
@@ -25,6 +26,17 @@ Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('book.dest
 Route::get('/peminjaman', [PeminjamanController::class, 'index']);
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::post('/peminjaman/kembalikan/{id}', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/admin', function () {
+    if (!session()->get('is_admin')) {
+        return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+    }
+    return view('dashboard');
+});
 
 Route::get('/api/books', function(Request $request){
     $q = $request->q;
