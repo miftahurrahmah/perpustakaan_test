@@ -49,7 +49,7 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->no_anggota }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->tgl_lahir }}</td>
+                            <td>{{ $item->tgl_lahir_formatted }}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">
 

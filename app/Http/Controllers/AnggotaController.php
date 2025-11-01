@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Anggota;
+use Carbon\Carbon;
 
 class AnggotaController extends Controller
 {
@@ -19,6 +20,13 @@ class AnggotaController extends Controller
         } else {
             $anggota = Anggota::all();
         }
+
+        $anggota = $anggota->map(function($item){
+            $item->tgl_lahir_formatted = $item->tgl_lahir
+                ? Carbon::parse($item->tgl_lahir)->translatedFormat('d F Y')
+                : '-';
+            return $item;
+        });
 
         return view('anggota.index', compact('anggota'));
     }

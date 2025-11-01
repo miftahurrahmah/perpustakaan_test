@@ -23,15 +23,10 @@
             </a>
         </li>
 
-        <li class="nav-item dropdown mb-2">
-            <a class="nav-link dropdown-toggle text-white d-flex align-items-center gap-2"
-                href="#" id="laporanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item mb-2">
+            <a class="nav-link text-white d-flex align-items-center gap-2" href="/peminjaman">
                 <i class="fa-solid fa-handshake me-2"></i> <span>Data Transaksi</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark bg-secondary border-0 shadow"aria-labelledby="laporanDropdown">
-                <li><a class="dropdown-item text-white" href="#">Pinjaman</a></li>
-                    <li><a class="dropdown-item text-white" href="#">Pengembalian</a></li>
-            </ul>
         </li>
     </ul>
   </div>
