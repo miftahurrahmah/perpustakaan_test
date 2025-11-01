@@ -14,7 +14,7 @@
 
           <div class="mb-3">
             <label for="no_anggota{{ $anggota->id }}" class="form-label">Nomor Anggota</label>
-            <input type="number" class="form-control" id="no_anggota{{ $anggota->id }}" name="no_anggota" value="{{ $anggota->no_anggota }}" required>
+            <input type="number" class="form-control" id="no_anggota{{ $anggota->id }}" name="no_anggota" value="{{ $anggota->no_anggota }}" readonly>
           </div>
 
           <div class="mb-3">
