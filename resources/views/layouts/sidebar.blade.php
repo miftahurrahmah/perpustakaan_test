@@ -6,7 +6,7 @@
 
     <ul class="nav flex-column">
         <li class="nav-item mb-2">
-            <a class="nav-link text-white d-flex align-items-center gap-2" href="#">
+            <a class="nav-link text-white d-flex align-items-center gap-2" href="/dashboard">
                 <i class="fa-solid fa-house me-2"></i> <span>Dashboard</span>
             </a>
         </li>
