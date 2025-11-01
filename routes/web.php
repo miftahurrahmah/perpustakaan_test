@@ -16,10 +16,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/anggota', [AnggotaController::class, 'index']);
+Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
 Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
 Route::put('/anggota/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
 Route::delete('/anggota/{id}', [AnggotaController::class, 'destroy'])->name('anggota.destroy');
+Route::get('/anggota/{id}/riwayat', [AnggotaController::class, 'riwayat'])->name('anggota.riwayat');
 
 Route::get('/book', [BookController::class, 'index']);
 Route::post('/book/store', [BookController::class, 'store'])->name('book.store');

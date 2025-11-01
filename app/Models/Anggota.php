@@ -18,4 +18,9 @@ class Anggota extends Model
     ];
 
     protected $dates = ['tgl_lahir'];
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'anggota_id');
+    }
 }

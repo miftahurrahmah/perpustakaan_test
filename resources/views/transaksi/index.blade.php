@@ -52,7 +52,12 @@
                             <td>{{ $item->tgl_peminjaman_formatted }}</td>
                             <td>{{ $item->book->judul_buku ?? '-' }}</td>
                             <td>{{ $item->anggota->nama ?? '-' }}</td>
-                            <td>{{ $item->tgl_pengembalian_formatted  ?? 'Null' }}</td>
+                            <td>
+                                {{ $item->tgl_pengembalian_formatted ?? '-' }}
+                                @if($item->keterlambatan)
+                                    <br><span class="text-danger">{{ $item->keterlambatan }}</span>
+                                @endif
+                            </td>
                             <td>{{ $item->status }}</td>
                             <td style="width: 150px;">
                             <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">

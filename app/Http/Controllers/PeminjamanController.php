@@ -10,28 +10,49 @@ use Carbon\Carbon;
 
 class PeminjamanController extends Controller
 {
-    public function index()
-    {
-        $query = Peminjaman::with(['book', 'anggota'])
-            ->where('status', '!=', 'Dikembalikan');
+    public function index(Request $request)
+{
+    $keyword = $request->keyword;
 
-        $peminjaman = $query->get()->map(function($item){
-            $item->tgl_peminjaman_formatted = $item->tgl_peminjaman
-                ? Carbon::parse($item->tgl_peminjaman)->translatedFormat('d F Y')
-                : '-';
+    $query = Peminjaman::with(['book', 'anggota'])
+        ->where('status', '!=', 'Dikembalikan');
 
-            $item->tgl_pengembalian_formatted = $item->tgl_pengembalian
-                ? Carbon::parse($item->tgl_pengembalian)->translatedFormat('d F Y')
-                : '-';
-
-            return $item;
+    if ($keyword) {
+        $query->whereHas('anggota', function($q) use ($keyword) {
+            $q->where('nama', 'like', "%$keyword%");
+        })->orWhereHas('book', function($q) use ($keyword) {
+            $q->where('judul_buku', 'like', "%$keyword%");
         });
-
-        $anggota = Anggota::all();
-        $book = Book::all();
-
-        return view('transaksi.index', compact('peminjaman', 'anggota', 'book'));
     }
+
+    $peminjaman = $query->get()->map(function($item){
+        $item->tgl_peminjaman_formatted = $item->tgl_peminjaman
+            ? Carbon::parse($item->tgl_peminjaman)->translatedFormat('d F Y')
+            : '-';
+
+        $item->tgl_pengembalian_formatted = $item->tgl_pengembalian
+            ? Carbon::parse($item->tgl_pengembalian)->translatedFormat('d F Y')
+            : '-';
+
+        $tgl_peminjaman = Carbon::parse($item->tgl_peminjaman)->startOfDay();
+        $hari_sekarang = Carbon::now()->startOfDay();
+        $totalHari = $tgl_peminjaman->diffInDays($hari_sekarang);
+
+        if($totalHari > 7 && $item->status !== 'Dikembalikan') {
+            $hariTelat = $totalHari - 7;
+            $item->keterlambatan = "Telat $hariTelat hari";
+        } else {
+            $item->keterlambatan = null;
+        }
+
+        return $item;
+    });
+
+    $anggota = Anggota::all();
+    $book = Book::all();
+
+    return view('transaksi.index', compact('peminjaman', 'anggota', 'book'));
+}
 
     public function store(Request $request)
     {

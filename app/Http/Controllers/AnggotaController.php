@@ -74,4 +74,24 @@ class AnggotaController extends Controller
 
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
+
+    public function riwayat($id)
+    {
+        $anggota = Anggota::with(['peminjaman.book'])->findOrFail($id);
+
+        foreach ($anggota->peminjaman as $p) {
+            $tglPeminjaman = Carbon::parse($p->tgl_peminjaman)->startOfDay();
+
+            if ($p->tgl_pengembalian) {
+                $tglKembali = Carbon::parse($p->tgl_pengembalian)->startOfDay();
+                $selisih = $tglPeminjaman->diffInDays($tglKembali);
+            } else {
+                $tglSekarang = Carbon::now()->startOfDay();
+                $selisih = $tglPeminjaman->diffInDays($tglSekarang);
+            }
+            $p->keterlambatan = $selisih > 7 ? $selisih - 7 : 0;
+        }
+
+        return view('anggota.riwayat', compact('anggota'));
+    }
 }
