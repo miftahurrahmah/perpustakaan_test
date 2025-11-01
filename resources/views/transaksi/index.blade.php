@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($peminjaman as $key => $item)
+                    @forelse($peminjaman as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->tgl_peminjaman_formatted }}</td>
@@ -60,24 +60,30 @@
                             </td>
                             <td>{{ $item->status }}</td>
                             <td style="width: 150px;">
-                            <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">
-                                @if($item->status !== 'Dikembalikan')
-                                    <form action="{{ route('peminjaman.kembalikan', $item->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Apakah Anda yakin mengembalikan buku ini?')"
-                                        class="m-0 p-0">
-                                        @csrf
-                                        <button type="submit"
-                                                class="btn btn-success btn-sm d-flex align-items-center gap-1"
-                                                title="Kembalikan">
-                                            <i class="fa fa-undo"></i> Kembalikan
-                                        </button>
-                                    </form>
-                                @endif
-                            </div>
-                        </td>
+                                <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">
+                                    @if($item->status !== 'Dikembalikan')
+                                        <form action="{{ route('peminjaman.kembalikan', $item->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin mengembalikan buku ini?')"
+                                            class="m-0 p-0">
+                                            @csrf
+                                            <button type="submit"
+                                                    class="btn btn-success btn-sm d-flex align-items-center gap-1"
+                                                    title="Kembalikan">
+                                                <i class="fa fa-undo"></i> Kembalikan
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-3">
+                                Belum ada data peminjaman.
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

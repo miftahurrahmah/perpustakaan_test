@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($book as $key => $item)
+                    @forelse($book as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->judul_buku }}</td>
@@ -81,7 +81,13 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-3">
+                                Belum ada data buku.
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

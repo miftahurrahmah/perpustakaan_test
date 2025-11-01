@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($anggota as $key => $item)
+                    @forelse($anggota as $key => $item)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->no_anggota }}</td>
@@ -53,10 +53,10 @@
                             <td style="width: 100px;">
                                 <div class="d-flex justify-content-center align-items-center gap-2" style="min-height: 40px;">
                                     <a href="{{ route('anggota.riwayat', $item->id) }}"
-                                        class="btn btn-info btn-sm d-flex align-items-center justify-content-center"
-                                        style="width: 32px; height: 32px;"
-                                        title="Riwayat Peminjaman">
-                                            <i class="fa fa-history"></i>
+                                    class="btn btn-info btn-sm d-flex align-items-center justify-content-center"
+                                    style="width: 32px; height: 32px;"
+                                    title="Riwayat Peminjaman">
+                                        <i class="fa fa-history"></i>
                                     </a>
 
                                     <a href="#"
@@ -85,7 +85,13 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-3">
+                                Belum ada data anggota.
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
